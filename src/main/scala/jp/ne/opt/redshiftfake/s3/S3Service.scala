@@ -40,7 +40,7 @@ trait S3Service {
 class S3ServiceImpl(endpoint: String) extends S3Service {
 
   private[redshiftfake] def mkClient(credentials: Credentials) = {
-    val client = credentials match {
+    val client = new AmazonS3Client() /*credentials match {
       case Credentials.WithKey(accessKeyId, secretAccessKey) =>
         new AmazonS3Client(new BasicAWSCredentials(accessKeyId, secretAccessKey))
       case Credentials.WithRole(roleName) =>
@@ -57,7 +57,7 @@ class S3ServiceImpl(endpoint: String) extends S3Service {
 
       case _ =>
         new AmazonS3Client()
-    }
+    }*/
 
     client.setS3ClientOptions({
       val options = S3ClientOptions.builder()
