@@ -11,9 +11,10 @@ class UnloadCommandParser extends BaseParser with QueryCompatibility {
       val offset = in.offset
       val spaceSkipped = handleWhiteSpace(source, offset)
 
-      if (source.length() > spaceSkipped + 2 &&
-        (source.subSequence(spaceSkipped, spaceSkipped + 2) == "('" ||
-         source.subSequence(spaceSkipped, spaceSkipped + 3) == "($$" )) {
+      if ((source.length() > spaceSkipped + 2 &&
+          source.subSequence(spaceSkipped, spaceSkipped + 2) == "('") ||
+        (source.length() > spaceSkipped + 3 &&
+          source.subSequence(spaceSkipped, spaceSkipped + 3) == "($$" )) {
         val start = spaceSkipped + 2
 
         var i = start
