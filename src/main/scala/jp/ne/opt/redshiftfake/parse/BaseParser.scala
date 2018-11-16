@@ -26,7 +26,8 @@ trait BaseParser extends RegexParsers {
   val awsAuthArgsParser = {
     def parserWithKey = """[\w_]+=""".r ~ """[\w/+=:-]+""".r ~ (";aws_secret_access_key=" ~> """[\w/+=]+""".r).? ^^ {
       case "aws_access_key_id=" ~ accessKeyId ~ Some(secretAccessKey) => Credentials.WithKey(accessKeyId, secretAccessKey)
-      case "aws_role_arn=" ~ awsIamRole ~ None => Credentials.WithRole(awsIamRole)
+      case "aws_role_arn=" ~ awsArnRole ~ None => Credentials.WithRole(awsArnRole)
+      case "aws_iam_role=" ~ awsIamRole ~ None => Credentials.WithRole(awsIamRole)
     }
 
     "'" ~> parserWithKey <~ "'"
