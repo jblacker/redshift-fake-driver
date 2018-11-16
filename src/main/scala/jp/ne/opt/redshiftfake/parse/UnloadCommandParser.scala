@@ -28,9 +28,10 @@ class UnloadCommandParser extends BaseParser with QueryCompatibility {
           if (i > 1) { escape = Some(source.charAt(i - 2)) }
           i += 1
         }
-        if (source.length() > 2 &&
-            (source.subSequence(i - 2, i) == "')" || source.subSequence(i - 2, i) == "$)")) {
+        if (source.length() > 2 && source.subSequence(i - 2, i) == "')")  {
           Success(source.subSequence(start, i - 2).toString, in.drop(i - offset))
+        } else if (source.length() > 3 && source.subSequence(i - 3, i) == "$$)") {
+          Success(source.subSequence(start, i - 3).toString, in.drop(i - offset))
         } else {
           Failure("failed", in.drop(start - offset))
         }
