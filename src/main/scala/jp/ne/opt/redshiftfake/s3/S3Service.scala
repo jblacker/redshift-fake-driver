@@ -75,11 +75,12 @@ class S3ServiceImpl(endpoint: String) extends S3Service {
     })
 
     client.setRegion(Global.region)
-    if (endpoint != "s3://") {
+    client.setEndpoint("http://s3:4569/")
+    /*if (endpoint != "s3://") {
       client.setEndpoint(endpoint)
     } else {
       client.setEndpoint(Global.region.getServiceEndpoint(ServiceAbbreviations.S3))
-    }
+    }*/
     client
   }
 
